@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "value": "<location>"
+            "value": "westeurope"
         },
         "storage_account_name": {
-            "value": "<unique storage account name>"
+            "value": "dwisa202301"
         },
         "modules_url": {
-            "value": "https://github.com/gamcmaho/dnsresolver/raw/main/scripts/Deploy-DnsManager.zip"
+            "value": "https://github.com/wasytb72/az-privatednsresolver-demo/blob/main/scripts/Deploy-DnsManager.zip"
         },
         "bastion_name": {
             "value": "bastion-resolver"
@@ -93,13 +93,19 @@
             "value": "nic-vm-spoke"
         },
         "private_dns_zone_name": {
-            "value": "privatelink.file.core.windows.net"
+            "value": "test.contoso.com"
         },
         "dns_resolver_name": {
-            "value": "<dns private resolver name>"
+            "value": "contosodnsresolver"
         },
         "domain_name": {
-            "value": "<domain name with trailing dot, e.g. myexample.com.>"
+            "value": "contoso.com"
+        },
+        "storagedeploy": {
+            "value": false
+        },
+        "dnsproberecord":{
+            "value": "10.3.0.68"
         }
     }
 }

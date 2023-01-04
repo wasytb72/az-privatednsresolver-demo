@@ -41,6 +41,11 @@ param private_dns_zone_name string
 param custom_dns_server string
 param dns_resolver_name string
 param domain_name string
+
+param storagedeploy bool
+
+param dnsproberecord string
+
 var inbound_resolver_name = 'inbound-${dns_resolver_name}'
 var outbound_resolver_name = 'outbound-${dns_resolver_name}'
 var ruleset_name = 'ruleset-${dns_resolver_name}'
@@ -63,39 +68,6 @@ resource bastionpip 'Microsoft.Network/publicIPAddresses@2022-01-01' = {
   properties: {
     publicIPAddressVersion: 'IPv4'
     publicIPAllocationMethod: 'Static'
-  }
-}
-
-resource storageaccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
-  name: storage_account_name
-  location: location
-  sku: {
-    name: 'Standard_LRS'
-  }
-  kind: 'StorageV2'
-  properties: {
-    publicNetworkAccess: 'Disabled'
-    allowCrossTenantReplication: false
-    allowBlobPublicAccess: false
-    allowSharedKeyAccess: true
-    networkAcls: {
-      bypass: 'AzureServices'
-      virtualNetworkRules: []
-      ipRules: []
-      defaultAction: 'Deny'
-    }
-    supportsHttpsTrafficOnly: true
-    encryption: {
-      requireInfrastructureEncryption: false
-      services: {
-        file: {
-          keyType: 'Account'
-          enabled: true
-        }
-      }
-      keySource: 'Microsoft.Storage'
-    }
-    accessTier: 'Hot'
   }
 }
 
@@ -324,17 +296,6 @@ resource vmspokenic 'Microsoft.Network/networkInterfaces@2022-01-01' = {
   }
 }
 
-resource privatednszonerecord 'Microsoft.Network/privateDnsZones/A@2020-06-01' = {
-  name: '${privatednszone.name}/${storageaccount.name}'
-  properties: {
-    ttl: 3600
-    aRecords: [
-      {
-        ipv4Address: storagepe.properties.customDnsConfigs[0].ipAddresses[0]
-      }
-    ]
-  }
-}
 
 resource bastion 'Microsoft.Network/bastionHosts@2022-01-01' = {
   name: bastion_name
@@ -383,28 +344,6 @@ resource vnetlinktohub 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@20
     vnetlinktospoke
   ]
 }
-
-resource storagepe 'Microsoft.Network/privateEndpoints@2022-01-01' = {
-  name: storage_pe_name
-  location: location
-  properties: {
-    privateLinkServiceConnections: [
-      {
-        name: '${storage_pe_name}-conn'
-        properties: {
-          privateLinkServiceId: storageaccount.id
-          groupIds: [
-            'file'
-          ]
-        }
-      }
-    ]
-    subnet: {
-      id: vnetspoke.properties.subnets[0].id
-    }
-  }
-}
-
 
 resource vnetspoke 'Microsoft.Network/virtualNetworks@2022-01-01' = {
   name: vnet_spoke_name
@@ -631,5 +570,28 @@ resource rules 'Microsoft.Network/dnsForwardingRulesets/forwardingRules@2022-07-
         port: 53
       }
     ]
+  }
+}
+
+resource privatednszonerecord 'Microsoft.Network/privateDnsZones/A@2020-06-01' = {
+  name: '${private_dns_zone_name}/probedns'
+  properties: {
+    ttl: 3600
+    aRecords: [
+      {
+        ipv4Address: dnsproberecord
+      }
+    ]
+  }
+}
+
+module storage 'storage.bicep' = if (storagedeploy) {
+  name: 'storage-with-privatelink'
+  params:{
+    location: location
+    storage_account_name: storage_account_name
+    storage_pe_name: storage_pe_name
+    vnetspokesubnetid: vnetspoke.properties.subnets[0].id
+    privatednszonename: private_dns_zone_name
   }
 }
