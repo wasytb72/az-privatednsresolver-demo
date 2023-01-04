@@ -1,0 +1,105 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "<location>"
+        },
+        "storage_account_name": {
+            "value": "<unique storage account name>"
+        },
+        "modules_url": {
+            "value": "https://github.com/gamcmaho/dnsresolver/raw/main/scripts/Deploy-DnsManager.zip"
+        },
+        "bastion_name": {
+            "value": "bastion-resolver"
+        },
+        "bastion_pip_name": {
+            "value": "pip-bastion-resolver"
+        },
+        "vnet_hub_name": {
+            "value": "vnet-hub"
+        },
+        "vnet_hub_cidr": {
+            "value": "10.0.0.0/24"
+        },
+        "bastion_subnet_cidr": {
+            "value": "10.0.0.0/26"
+        },
+        "inbound_resolver_subnet_name": {
+            "value": "snet-inbound-resolver"
+        },
+        "inbound_resolver_subnet_cidr": {
+            "value": "10.0.0.64/26"
+        },
+        "outbound_resolver_subnet_name": {
+            "value": "snet-outbound-resolver"
+        },
+        "outbound_resolver_subnet_cidr": {
+            "value": "10.0.0.128/26"
+        },
+        "vnet_spoke_name": {
+            "value": "vnet-spoke"
+        },
+        "vnet_spoke_cidr": {
+            "value": "10.1.0.0/24"
+        },
+        "spoke_subnet_name": {
+            "value": "snet-spoke"
+        },
+        "spoke_subnet_cidr": {
+            "value": "10.1.0.0/26"
+        },
+        "vnet_onprem_name": {
+            "value": "vnet-onprem"
+        },
+        "vnet_onprem_cidr": {
+            "value": "10.3.0.0/24"
+        },
+        "dns_subnet_name": {
+            "value": "snet-dns"
+        },
+        "dns_subnet_cidr": {
+            "value": "10.3.0.0/26"
+        },
+        "consumer_subnet_name": {
+            "value": "snet-consumer"
+        },
+        "consumer_subnet_cidr": {
+            "value": "10.3.0.64/26"
+        },
+        "custom_dns_server": {
+            "value": "10.3.0.4"
+        },
+        "vm_onprem_dns_name": {
+            "value": "vm-dns"
+        },
+        "vm_onprem_consumer_name": {
+            "value": "vm-consumer"
+        },
+        "vm_spoke_name": {
+            "value": "vm-spoke"
+        },
+        "vm_size": {
+            "value": "Standard_D2s_v3"
+        },
+        "vm_onprem_dns_nic_name": {
+            "value": "nic-vm-dns"
+        },
+        "vm_onprem_consumer_nic_name": {
+            "value": "nic-vm-consumer"
+        },
+        "vm_spoke_nic_name": {
+            "value": "nic-vm-spoke"
+        },
+        "private_dns_zone_name": {
+            "value": "privatelink.file.core.windows.net"
+        },
+        "dns_resolver_name": {
+            "value": "<dns private resolver name>"
+        },
+        "domain_name": {
+            "value": "<domain name with trailing dot, e.g. myexample.com.>"
+        }
+    }
+}
