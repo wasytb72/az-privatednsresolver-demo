@@ -420,11 +420,6 @@ resource vnetonprem 'Microsoft.Network/virtualNetworks@2022-01-01' = {
         }
       }
     ]
-    dhcpOptions:{
-      dnsServers: [
-        custom_dns_server
-      ]
-    }
   }
 }
 
