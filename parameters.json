@@ -9,7 +9,7 @@
             "value": "dwisa202301"
         },
         "modules_url": {
-            "value": "https://github.com/wasytb72/az-privatednsresolver-demo/blob/main/scripts/Deploy-DnsManager.zip"
+            "value": "https://github.com/wasytb72/az-privatednsresolver-demo/raw/main/scripts/Deploy-DnsManager.zip"
         },
         "bastion_name": {
             "value": "bastion-resolver"
