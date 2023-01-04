@@ -99,7 +99,7 @@
             "value": "contosodnsresolver"
         },
         "domain_name": {
-            "value": "contoso.com"
+            "value": "contoso.com."
         },
         "storagedeploy": {
             "value": false
