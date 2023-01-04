@@ -5,7 +5,7 @@ Azure DNS Private Resolver provides the glue, with its inbound and outbound endp
 <br><br>
 Note. The deployment assumes an empty Resource Group and provisions a DNS Manager VM, using PowerShell DSC and Custom Script Extension.
 <br><br><br>
-<img src="https://github.com/wasytb72/az-privateresolver-demo/blob/main/DnsPrivateResolver.jpg">
+<img src="https://github.com/wasytb72/az-privatednsresolver-demo/DnsPrivateResolver.jpg">
 <br><br>
 <h3>Git Clone the repo to your local device</h3>
 git clone https://github.com/gamcmaho/dnsresolver.git
