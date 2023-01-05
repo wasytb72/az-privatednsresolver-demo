@@ -52,6 +52,8 @@ Add Host
 <br><br>
 <h3>Congratulations, you're up and running with Azure DNS Private Resolver!</h3>
 <br>
-From the vm-consumer on-premises, you can "nslookup &ltstorageaccountname&gt.file.core.windows.net"
+From the vm-consumer on-premises, you can "nslookup & probedns.test.contoso.com"
 <br><br>
-From the vm-spoke in Azure, you can "nslookup vm-consumer.myexample.com"
+From the vm-spoke in Azure, you can "nslookup probe.contoso.com"
+<br>
+To make the On-Prem DNS work. First create the conditional forwarder against "test.contoso.com" and then the authoritative zone contoso.com

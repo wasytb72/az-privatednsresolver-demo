@@ -583,6 +583,9 @@ resource privatednszonerecord 'Microsoft.Network/privateDnsZones/A@2020-06-01' =
       }
     ]
   }
+  dependsOn: [
+    privatednszone
+  ]
 }
 
 module storage 'storage.bicep' = if (storagedeploy) {
