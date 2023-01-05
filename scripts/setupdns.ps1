@@ -6,4 +6,4 @@ Add-DnsServerConditionalForwarderZone -name "test.contoso.com" -MasterServers 10
 Add-DnsServerPrimaryZone -Name "contoso.com"
 
 #create record A probedns.contoso.com with IP 10.3.0.4
-Add-DnsServerResourceRecordA -Name probedns1 -IPv4Address 10.3.0.5 -ZoneName contoso.com
+Add-DnsServerResourceRecordA -Name probedns -IPv4Address 10.3.0.5 -ZoneName contoso.com
